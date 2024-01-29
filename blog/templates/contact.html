@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Əsas səhifə {% endblock %}
+
+{% block content %}
+
+    <!-- Contact Start -->
+    <div class="container bg-white pt-5">
+    {% for contact in contacts %}
+        <div class="row px-3 pb-2">
+            <div class="col-sm-4 text-center mb-3">
+                <i class="fa fa-2x fa-map-marker-alt mb-3 text-primary"></i>
+                <h4 class="font-weight-bold">Address</h4>
+                <p>{{ contact.address }}</p>
+            </div>
+            {% if contact.phone %}
+            <div class="col-sm-4 text-center mb-3">
+                <i class="fa fa-2x fa-phone-alt mb-3 text-primary"></i>
+                <h4 class="font-weight-bold">Phone</h4>
+                <p>{{ contact.phone }}</p>
+            {% endif %}
+            </div>
+            <div class="col-sm-4 text-center mb-3">
+                <i class="far fa-2x fa-envelope mb-3 text-primary"></i>
+                <h4 class="font-weight-bold">Email</h4>
+                <p>{{ contact.email }}</p>
+            </div>
+        </div>
+    {% endfor %}
+        <div class="col-md-12 pb-5">
+            <div class="contact-form">
+                <div id="success" style="background-color: rgba(0, 128, 0, 0.6); line-height: 2; color:red; font-weight: bold;">{% if success %} {{ success }} {% endif %}</div>
+                <form action="{% url 'contact' %}" method="post">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="name" placeholder="Adınız" required="required" data-validation-required-message="Zəhmət olmasa adınızı daxil edin!" />
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="control-group">
+                        <input type="email" class="form-control" name="email" placeholder="E poçt" required="required" data-validation-required-message="Zəhmtə olmasa e-poçtunuzu daxil edin!" />
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="control-group">
+                        <input type="text" class="form-control" name="subject" placeholder="Mövzu" required="required" data-validation-required-message="Zəhmət olmasa mövzunuzu daxil edin!" />
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="control-group">
+                        <textarea class="form-control" rows="8" name="message" placeholder="Mesaj" required="required" data-validation-required-message="Zəhmət olmasa mesajınızı daxil edin!"></textarea>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit">Göndər</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+{% endblock %}

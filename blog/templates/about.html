@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Əsas səhifə {% endblock %}
+
+{% block content %}
+
+    <!-- Page Header Start -->
+    <div class="container py-5 px-2 bg-primary">
+        <div class="row py-5 px-4">
+            <div class="col-sm-6 text-center text-md-left">
+                <h1 class="mb-3 mb-md-0 text-white text-uppercase font-weight-bold">Haqqımda</h1>
+            </div>
+            <div class="col-sm-6 text-center text-md-right">
+                <div class="d-inline-flex pt-2">
+                    <h4 class="m-0 text-white"><a class="text-white" href="{% url '' %}">Əsas səhifə</a></h4>
+                    <h4 class="m-0 text-white px-2">/</h4>
+                    <h4 class="m-0 text-white">Haqqımda</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- About Start -->
+    <div class="container bg-white pt-5">
+        <div class="row px-3 pb-5">
+        {% for about in abouts %}
+            <div class="col-md-12">
+                <h2 class="mb-4 font-weight-bold">{{ about.title }}</h2>
+                {% if about.images %}<img class="img-fluid float-left w-50 mr-4 mb-3" src="{{ about.images.url }}" alt="Image">{% endif %}
+                <p class="m-0">
+                    {{ about.text|safe }}
+                </p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    <!-- About End -->
+{% endblock %}
